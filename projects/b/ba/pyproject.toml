@@ -1,0 +1,17 @@
+[project]
+name = "project-ba"
+version = "1.0.0"
+description = "Project BA - nested workspace member (included)"
+requires-python = ">=3.10"
+
+dependencies = [
+    "project-a",
+    "httpx>=0.26.0",
+]
+
+[tool.uv.sources]
+project-a = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

@@ -1,0 +1,41 @@
+[project]
+name = "workspace-exclusion"
+version = "1.0.0"
+description = "Test: Workspace exclusion with exclude patterns"
+requires-python = ">=3.10"
+
+dependencies = [
+    "requests>=2.31.0",
+]
+
+# Workspace with exclusions
+# See: https://github.com/astral-sh/uv/issues/7071
+[tool.uv.workspace]
+members = [
+    "projects/*",      # Include all direct children of projects/
+    "projects/b/*",    # Include nested children of projects/b/
+]
+exclude = [
+    "projects/b",          # Exclude projects/b (no pyproject.toml, just a container)
+    "projects/excluded1",  # Exclude specific project
+    "projects/excluded2",  # Exclude another specific project
+    "docs",                # Exclude docs directory (not a workspace member anyway)
+]
+
+# Expected workspace members:
+# ✓ projects/a (included by projects/*)
+# ✗ projects/b (excluded implicitly - no pyproject.toml)
+# ✓ projects/b/ba (included by projects/b/*)
+# ✓ projects/b/bb (included by projects/b/*)
+# ✓ projects/c (included by projects/*)
+# ✗ projects/excluded1 (explicitly excluded)
+# ✗ projects/excluded2 (explicitly excluded)
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

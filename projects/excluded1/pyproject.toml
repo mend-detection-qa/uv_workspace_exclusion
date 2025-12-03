@@ -1,0 +1,17 @@
+[project]
+name = "project-excluded1"
+version = "1.0.0"
+description = "Project Excluded1 - explicitly excluded from workspace"
+requires-python = ">=3.10"
+
+# This project has a valid pyproject.toml
+# But it's explicitly excluded in the root workspace configuration
+# exclude = ["projects/excluded1"]
+
+dependencies = [
+    "click>=8.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

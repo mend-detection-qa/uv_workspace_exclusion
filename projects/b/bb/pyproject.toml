@@ -1,0 +1,19 @@
+[project]
+name = "project-bb"
+version = "1.0.0"
+description = "Project BB - nested workspace member (included)"
+requires-python = ">=3.10"
+
+dependencies = [
+    "project-a",
+    "project-ba",
+    "pydantic>=2.6.0",
+]
+
+[tool.uv.sources]
+project-a = { workspace = true }
+project-ba = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

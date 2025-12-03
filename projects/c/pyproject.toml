@@ -1,0 +1,17 @@
+[project]
+name = "project-c"
+version = "1.0.0"
+description = "Project C - included in workspace"
+requires-python = ">=3.10"
+
+dependencies = [
+    "project-ba",
+    "sqlalchemy>=2.0.25",
+]
+
+[tool.uv.sources]
+project-ba = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
